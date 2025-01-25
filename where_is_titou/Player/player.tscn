@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dq45s8a7603ap"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_uc334"]
+[ext_resource type="Texture2D" uid="uid://2ytribpejsd4" path="res://assets/bubblesyellow.png" id="2_xqk3a"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n6uuf"]
+radius = 12.0444
+height = 32.4212
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_uc334")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -1.5708
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_xqk3a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -1)
+scale = Vector2(1.16237, 1.17207)
+shape = SubResource("CapsuleShape2D_n6uuf")
