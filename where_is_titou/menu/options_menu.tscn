@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6nxtmlb76n52"]
+
+[ext_resource type="Script" path="res://menu/options_menu.gd" id="1_jju0p"]
+
+[node name="Options_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jju0p")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_right = 512.0
+offset_bottom = 128.0
+
+[node name="left" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "left"
+
+[node name="right" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "right"
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Jump"
