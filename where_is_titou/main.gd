@@ -7,7 +7,6 @@ func _ready() -> void:
 	var Player = get_node("Player")
 	var spawn_platform = get_node("spawn_platform")
 	spawn_platform.start()
-	Player.position = Marker
 	
 func _on_spawn_platform_timeout() -> void:
 	var platform = get_node("platform")
@@ -17,5 +16,5 @@ func _on_spawn_platform_timeout() -> void:
 	
 	var direction = platform_spawn.rotation
 	
-	platform.position = platform_spawn.position
+	#platform.position = platform_spawn.position
 	

@@ -21,9 +21,12 @@ point_count = 2
 script = ExtResource("1_rxihi")
 
 [node name="Player" parent="." instance=ExtResource("1_n8pir")]
+position = Vector2(330, 81)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
 
 [node name="platform" type="AnimatableBody2D" parent="."]
-position = Vector2(360, 278)
+position = Vector2(566, 208)
 script = ExtResource("3_travf")
 metadata/_edit_group_ = true
 
@@ -44,10 +47,24 @@ curve = SubResource("Curve2D_xhgxg")
 [node name="platform_spawn_path" type="PathFollow2D" parent="platformpath"]
 position = Vector2(640, 0)
 
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(960, 1000)
-
 [node name="spawn_platform" type="Timer" parent="."]
+
+[node name="platform2" type="AnimatableBody2D" parent="."]
+position = Vector2(312, 216)
+script = ExtResource("3_travf")
+metadata/_edit_group_ = true
+
+[node name="platform_texture" type="MeshInstance2D" parent="platform2"]
+rotation = 3.14159
+mesh = SubResource("QuadMesh_u1ilw")
+texture = ExtResource("2_cgefc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="platform2"]
+position = Vector2(0.5, -4)
+shape = SubResource("RectangleShape2D_uq0kr")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="platform2"]
 
 [connection signal="screen_exited" from="platform/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="timeout" from="spawn_platform" to="." method="_on_spawn_platform_timeout"]
+[connection signal="screen_exited" from="platform2/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
