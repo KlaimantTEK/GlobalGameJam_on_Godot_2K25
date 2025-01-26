@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://v4nwxpi25w26"]
+
+[ext_resource type="PackedScene" uid="uid://dq45s8a7603ap" path="res://Player/player.tscn" id="1_n8pir"]
+[ext_resource type="Script" path="res://main.gd" id="1_rxihi"]
+[ext_resource type="Texture2D" uid="uid://bmhd8y0umtyas" path="res://assets/platform1.png" id="2_cgefc"]
+[ext_resource type="Script" path="res://platform.gd" id="3_travf"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_u1ilw"]
+size = Vector2(400, 75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uq0kr"]
+size = Vector2(187, 36)
+
+[sub_resource type="Curve2D" id="Curve2D_xhgxg"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 640, 0, 0, 0, 0, 0, 1280, 0)
+}
+point_count = 2
+
+[node name="main" type="Node"]
+script = ExtResource("1_rxihi")
+
+[node name="Player" parent="." instance=ExtResource("1_n8pir")]
+
+[node name="platform" type="AnimatableBody2D" parent="."]
+position = Vector2(360, 278)
+script = ExtResource("3_travf")
+metadata/_edit_group_ = true
+
+[node name="platform_texture" type="MeshInstance2D" parent="platform"]
+rotation = 3.14159
+mesh = SubResource("QuadMesh_u1ilw")
+texture = ExtResource("2_cgefc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="platform"]
+position = Vector2(0.5, -4)
+shape = SubResource("RectangleShape2D_uq0kr")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="platform"]
+
+[node name="platformpath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_xhgxg")
+
+[node name="platform_spawn_path" type="PathFollow2D" parent="platformpath"]
+position = Vector2(640, 0)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(960, 1000)
+
+[node name="spawn_platform" type="Timer" parent="."]
+
+[connection signal="screen_exited" from="platform/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="timeout" from="spawn_platform" to="." method="_on_spawn_platform_timeout"]
