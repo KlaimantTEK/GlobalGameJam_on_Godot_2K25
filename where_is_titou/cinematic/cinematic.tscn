@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwon5407a8d1s"]
+
+[ext_resource type="Script" path="res://cinematic/cinematic.gd" id="1_7akij"]
+[ext_resource type="VideoStream" path="res://assets/lul-_1_.ogv" id="2_kqont"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_7akij")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 8.0
+offset_right = 23.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("2_kqont")
+autoplay = true
+expand = true
+
+[connection signal="finished" from="VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]

@@ -7,7 +7,7 @@ func _ready() -> void:
 
 
 func _on_play_pressed():
-	get_tree().change_scene_to_file("NULL");
+	get_tree().change_scene_to_file("res://cinematic/cinematic.tscn");
 
 
 func _on_settings_pressed() -> void:
