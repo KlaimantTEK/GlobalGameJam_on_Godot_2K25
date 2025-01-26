@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://dwon5407a8d1s"]
+[gd_scene load_steps=6 format=3 uid="uid://dwon5407a8d1s"]
 
 [ext_resource type="Script" path="res://cinematic/cinematic.gd" id="1_7akij"]
 [ext_resource type="VideoStream" path="res://assets/lul-_1_.ogv" id="2_kqont"]
+[ext_resource type="AudioStream" uid="uid://b6ffpwxokbkjx" path="res://assets/bar_sounds.mp3" id="3_uh5pb"]
+[ext_resource type="AudioStream" uid="uid://q4ekfljjkb24" path="res://assets/glass_sounds.mp3" id="4_quifj"]
+[ext_resource type="AudioStream" uid="uid://dqw8t6hvmg56m" path="res://assets/Drinking and Burping Sound Effect.mp3" id="5_ndfnn"]
 
 [node name="Node" type="Node"]
 script = ExtResource("1_7akij")
@@ -19,5 +22,17 @@ grow_vertical = 2
 stream = ExtResource("2_kqont")
 autoplay = true
 expand = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_uh5pb")
+parameters/looping = false
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_quifj")
+volume_db = 15.127
+
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_ndfnn")
+volume_db = 24.0
 
 [connection signal="finished" from="VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]
