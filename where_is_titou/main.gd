@@ -6,7 +6,6 @@ func _ready() -> void:
 	var Marker = get_node("Marker2D")
 	var Player = get_node("Player")
 	var spawn_platform = get_node("spawn_platform")
-	spawn_platform.start()
 	
 func _on_spawn_platform_timeout() -> void:
 	var platform = get_node("platform")

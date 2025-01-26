@@ -1,23 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://v4nwxpi25w26"]
+[gd_scene load_steps=11 format=3 uid="uid://v4nwxpi25w26"]
 
 [ext_resource type="PackedScene" uid="uid://dq45s8a7603ap" path="res://Player/player.tscn" id="1_n8pir"]
 [ext_resource type="Script" path="res://main.gd" id="1_rxihi"]
 [ext_resource type="Texture2D" uid="uid://bmhd8y0umtyas" path="res://assets/platform1.png" id="2_cgefc"]
+[ext_resource type="Texture2D" uid="uid://dasaxghmrmvv6" path="res://assets/beer_no_back.png" id="3_8p2y4"]
 [ext_resource type="Script" path="res://platform.gd" id="3_travf"]
 [ext_resource type="AudioStream" uid="uid://b6ffpwxokbkjx" path="res://assets/bar_sounds.mp3" id="5_3jvc4"]
-[ext_resource type="Texture2D" uid="uid://cwmf360nwds3k" path="res://assets/background.jpeg" id="5_djfl4"]
+[ext_resource type="PackedScene" uid="uid://edd1evlbt33" path="res://lvl_design/level_design.tscn" id="7_jdx8q"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_u1ilw"]
 size = Vector2(400, 75)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uq0kr"]
-size = Vector2(195, 36)
-
-[sub_resource type="Curve2D" id="Curve2D_xhgxg"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 640, 0, 0, 0, 0, 0, 1280, 0)
-}
-point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8eoic"]
 size = Vector2(1610.34, 186.093)
@@ -29,51 +21,19 @@ b = Vector2(-1000, -49097)
 [node name="main" type="Node"]
 script = ExtResource("1_rxihi")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+show_behind_parent = true
+visibility_layer = 512
+position = Vector2(199, -5805)
+scale = Vector2(11.555, 11.555)
+texture = ExtResource("3_8p2y4")
+
 [node name="Player" parent="." instance=ExtResource("1_n8pir")]
-position = Vector2(97, 450)
+position = Vector2(13, -8349)
+rotation = -0.0639175
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -1)
-
-[node name="platform" type="AnimatableBody2D" parent="."]
-position = Vector2(240, 258)
-script = ExtResource("3_travf")
-metadata/_edit_group_ = true
-
-[node name="platform_texture" type="MeshInstance2D" parent="platform"]
-rotation = 3.14159
-mesh = SubResource("QuadMesh_u1ilw")
-texture = ExtResource("2_cgefc")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="platform"]
-position = Vector2(1.5, -4)
-shape = SubResource("RectangleShape2D_uq0kr")
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="platform"]
-
-[node name="platformpath" type="Path2D" parent="."]
-curve = SubResource("Curve2D_xhgxg")
-
-[node name="platform_spawn_path" type="PathFollow2D" parent="platformpath"]
-position = Vector2(640, 0)
-
-[node name="spawn_platform" type="Timer" parent="."]
-
-[node name="platform2" type="AnimatableBody2D" parent="."]
-position = Vector2(-97, 327)
-script = ExtResource("3_travf")
-metadata/_edit_group_ = true
-
-[node name="platform_texture" type="MeshInstance2D" parent="platform2"]
-rotation = 3.14159
-mesh = SubResource("QuadMesh_u1ilw")
-texture = ExtResource("2_cgefc")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="platform2"]
-position = Vector2(0.5, -4)
-shape = SubResource("RectangleShape2D_uq0kr")
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="platform2"]
 
 [node name="platform3" type="AnimatableBody2D" parent="."]
 top_level = true
@@ -104,18 +64,11 @@ shape = SubResource("SegmentShape2D_u5luu")
 
 [node name="Line2D" type="Line2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-show_behind_parent = true
-visibility_layer = 512
-position = Vector2(-472, 441)
-texture = ExtResource("5_djfl4")
-
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_3jvc4")
 autoplay = true
 max_distance = 320000.0
 
-[connection signal="screen_exited" from="platform/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
-[connection signal="timeout" from="spawn_platform" to="." method="_on_spawn_platform_timeout"]
-[connection signal="screen_exited" from="platform2/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[node name="Level_design" parent="." instance=ExtResource("7_jdx8q")]
+
 [connection signal="screen_exited" from="platform3/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
