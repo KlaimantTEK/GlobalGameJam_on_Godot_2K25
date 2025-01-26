@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const gravity = 400
+const gravity = 450
 const SPEED = 350.0
 const JUMP_VELOCITY = -2500
 var jumping = 0
@@ -17,7 +17,7 @@ func _physics_process(delta: float) -> void:
 	
 	if jumping != 0:
 		jumping -= 1
-		velocity.y += JUMP_VELOCITY
+		velocity.y += JUMP_VELOCITY - (JUMP_VELOCITY / (jumping + 2)) * 2
 	
 	var h_dir = Input.get_axis("move_left", "move_right")
 	velocity.x = SPEED * h_dir
